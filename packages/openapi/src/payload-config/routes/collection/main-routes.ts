@@ -124,7 +124,7 @@ export const getMainRoutes = async (
     },
   };
 
-  const { schema, fieldDefinitions } = await entityToSchema(payloadConfig, collection);
+  const { schema, fieldDefinitions } = await entityToSchema(payloadConfig, collection, options.defaultIDType);
   const { example, examples } = collection.custom?.openapi || {};
 
   const components: OpenAPIV3.ComponentsObject = {

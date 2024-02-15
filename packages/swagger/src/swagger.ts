@@ -6,7 +6,7 @@ import { serveFile } from './utils/serve-file';
 
 export const loadSwagger = async (
   { express, config, logger }: Pick<Payload, 'express' | 'config' | 'logger'>,
-  options: Options = {},
+  options: Options = { defaultIDType: 'text' },
 ) => {
   if (!express) {
     logger.warn('Unable to load swagger: express not available');

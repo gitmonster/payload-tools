@@ -33,7 +33,10 @@ const readJsonFile = async <T = any>(relativePath: string): Promise<Partial<T>> 
 /**
  * Creates an openapi document for the given payload configuration
  */
-export const createDocument = async (payloadConfig: SanitizedConfig, options: Options = {}): Promise<OpenAPIV3.Document> => {
+export const createDocument = async (
+  payloadConfig: SanitizedConfig,
+  options: Options = { defaultIDType: 'text' },
+): Promise<OpenAPIV3.Document> => {
   const parsedOptions = await parseOptions(options, payloadConfig);
 
   if (!isSupported()) {

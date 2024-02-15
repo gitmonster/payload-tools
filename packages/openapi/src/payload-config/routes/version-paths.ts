@@ -27,7 +27,7 @@ export const createVersionRoutes = async (
   const security = await getRouteAccess(config, 'readVersions', options.access);
 
   // no need to map the fieldDefinitions, because they are already mapped in the main routes
-  const { schema } = await entityToSchema(payloadConfig, config);
+  const { schema } = await entityToSchema(payloadConfig, config, options.defaultIDType);
   const { id, createdAt, updatedAt, ...version } = schema.properties!;
 
   const versionedSchema: OpenAPIV3.SchemaObject = {

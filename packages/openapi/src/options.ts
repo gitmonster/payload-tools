@@ -26,10 +26,15 @@ export interface RawOptions {
    * If this is not possible (for instance in monorepo), it can be provided as option
    */
   payloadVersion?: string;
+  /**
+   * Payload default ID type
+   */
+  defaultIDType: 'number' | 'text';
 }
 
 export interface Options {
   payloadVersion?: Version;
+  defaultIDType: 'number' | 'text';
   access: {
     analyze: (slug: string) => boolean;
     cookieName: string;
@@ -47,11 +52,15 @@ export interface Options {
   };
 }
 
-export const parseOptions = async (options: RawOptions = {}, payloadConfig: SanitizedConfig): Promise<Options> => {
+export const parseOptions = async (
+  options: RawOptions = { defaultIDType: 'text' },
+  payloadConfig: SanitizedConfig,
+): Promise<Options> => {
   const payloadVersion = options.payloadVersion ? toVersion(options.payloadVersion) : await getPayloadVersion();
 
   return {
     payloadVersion,
+    defaultIDType: options.defaultIDType,
     access: {
       analyze: Array.isArray(options.disableAccessAnalysis)
         ? slug => !(options.disableAccessAnalysis as string[]).includes(slug)

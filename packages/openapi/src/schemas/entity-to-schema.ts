@@ -47,9 +47,10 @@ const stripEmptyRequired = (schema: OpenAPIV3.SchemaObject): OpenAPIV3.SchemaObj
 export const entityToSchema = async (
   config: SanitizedConfig,
   incomingEntity: SanitizedCollectionConfig | SanitizedGlobalConfig,
+  defaultIDType: 'number' | 'text',
 ): Promise<{ schema: OpenAPIV3.SchemaObject; fieldDefinitions: Record<string, OpenAPIV3.SchemaObject> }> => {
   const fieldDefinitionsMap = new Map();
-  const jsonschema = payloadEntityToJSONSchema(config, incomingEntity, fieldDefinitionsMap);
+  const jsonschema = payloadEntityToJSONSchema(config, incomingEntity, fieldDefinitionsMap, defaultIDType);
   const rawSchema = await convert(jsonschema);
   const fieldDefinitions = await reduceAsync(
     Array.from(fieldDefinitionsMap.entries()),

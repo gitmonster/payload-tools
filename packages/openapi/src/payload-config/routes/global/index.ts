@@ -43,7 +43,7 @@ export const getGlobalRoutes = async (
     },
   };
 
-  const { schema, fieldDefinitions } = await entityToSchema(payloadConfig, global);
+  const { schema, fieldDefinitions } = await entityToSchema(payloadConfig, global, options.defaultIDType);
   const { example, examples } = global.custom?.openapi || {};
 
   const components: OpenAPIV3.ComponentsObject = {

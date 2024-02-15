@@ -32,6 +32,12 @@ const optionList = [
     description: 'shows this help screen',
   },
   {
+    name: 'defaultIDType',
+    type: String,
+    description: 'Default ID type (number | text)',
+    group: 'options',
+  },
+  {
     name: 'disableAllAccessAnalysis',
     type: Boolean,
     description: 'Disable all endpoint access analysis',
@@ -112,6 +118,7 @@ const toAbsolutePath = (value?: string) => {
 
 const toOpenapiOptions = (args: commandLineArgs.CommandLineOptions): OpenapiOptions => ({
   disableAccessAnalysis: args.disableAllAccessAnalysis || args.disableAccessAnalysis,
+  defaultIDType: args.defaultIDType,
   exclude: {
     authPaths: args.excludeAuthPaths,
     authCollection: args.excludeAuthCollection,
